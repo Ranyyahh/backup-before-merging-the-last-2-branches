@@ -28,3 +28,120 @@ textarea {
     background-color: #777;
     border-color: #fff
 }
+
+
+
+/*HOMEPAGE*/
+
+/*FOR CUSTOMIZING NAVBAR LOOK*/
+.custom-navbar {
+    background-color: #ffffff;
+    border-bottom: 2px solid transparent;
+}
+
+    .custom-navbar .navbar-nav > li > a {
+        color: #111fa2;
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+        margin: 0 12px;
+        transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+        .custom-navbar .navbar-nav > li > a:hover {
+            color: #111fa2;
+            transform: scale(1.1);
+        }
+
+    .custom-navbar .navbar-nav ul > li > a.active {
+        background-color: #ffde42;
+    }
+
+    .custom-navbar .navbar-nav > li > a:focus {
+        color: #111fa2;
+    }
+
+/*TOGGLE BUTTON*/
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #111fa2;
+}
+
+/*HOMEPAGE*/
+/*bg for index/homepage only*/
+body.home-bg {
+    background-image: url('/Content/Images/BizzyQCU-Home-BG.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.hp-middle-content {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*TAGLINE*/
+.Homepage-tagline {
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+    .Homepage-tagline .GetStarted-btn {
+        background-color: #ffde42;
+        border: none;
+        color: #111fa2;
+        padding: 12px 28px;
+        border-radius: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        transition-duration: 0.4s;
+        margin-bottom: 10px;
+    }
+
+        .Homepage-tagline .GetStarted-btn:hover {
+            box-shadow: 3px 5px 12px 0 rgba(0,0,0,0.4);
+            background-color: #efc601;
+        }
+
+    .Homepage-tagline h1 {
+        font-weight: bolder;
+        font-size: clamp(24px, 10vw, 90px);
+        text-shadow: 1.5px 3px 2px #000000;
+    }
+
+    .Homepage-tagline p {
+        text-shadow: 1.5px 1.5px 3px #000000;
+    }
+
+    .Homepage-tagline h1, .Homepage-tagline p {
+        margin: 0;
+    }
+
+/*test query*/
+@media (max-width: 768px) {
+    .hero {
+        height: 70vh;
+    }
+}
+
+/*LOGO*/
+.navbar-brand img {
+    width: auto;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+    display: table-cell;
+    vertical-align: middle;
+}

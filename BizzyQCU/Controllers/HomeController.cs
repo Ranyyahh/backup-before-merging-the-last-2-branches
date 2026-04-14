@@ -26,5 +26,12 @@ namespace BizzyQCU.Controllers
 
             return View();
         }
+
+        public ActionResult Homepage()
+        {
+            ViewBag.Message = "Your Homepage.";
+
+            return View();
+        }
     }
 }
