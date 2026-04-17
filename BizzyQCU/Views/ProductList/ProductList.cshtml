@@ -1,0 +1,86 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Product List";
+    ViewBag.BodyClass = "product-page";
+}
+
+
+<div class="floating-header">
+    <h2>CAMPUS MARKETPLACE</h2>
+    <p>Shop from 12+ student enterprises - food, merch, printing, & more.</p>
+
+</div>
+
+<div class="search-filtering">
+
+    <div class="searchbox-section">
+        @Html.TextBox("searchString", null, new
+        {
+            @class = "search-input",
+            placeholder = "Search for products",
+            id = "productSearch",
+            autocomplete = "off"
+        })
+    </div>
+
+    <!-- CATEGORY DROPDOWN -->
+    <div class="filter-section">
+        @Html.DropDownList("category", new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Categories", Value = ""},
+            new SelectListItem { Text = "Food", Value = "food"},
+            new SelectListItem { Text = "Merchandise", Value = "merch"},
+            new SelectListItem { Text = "Printing", Value = "printing"},
+            new SelectListItem { Text = "Services", Value = "services"}
+        }, new { @class = "filter-dropdown" })
+
+
+        <!-- POPULARITY DROPDOWN -->
+        @Html.DropDownList("popularity", new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Sort by Popularity", Value = ""},
+            new SelectListItem { Text = "Most Popular", Value = "high"},
+            new SelectListItem { Text = "Least Popular", Value = "low"}
+        }, new { @class = "filter-dropdown" })
+
+
+        <!-- PRICE DROPDOWN -->
+        @Html.DropDownList("priceRange", new List<SelectListItem>
+        {
+            new SelectListItem { Text = "Price Range", Value = ""},
+            new SelectListItem { Text = "Low (₱1 - ₱100)", Value = "lowprice"},
+            new SelectListItem { Text = "High (₱100+)", Value = "highprice"}
+        }, new { @class = "filter-dropdown" })
+    </div>
+</div>
+
+<div class="container product-grid-container" style="margin-top: 50px;">
+    <div class="row">
+        <!--test only pls change temporary inline - food-->
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="product-card food lowprice high" style="border: 1px solid #ccc; padding: 20px; border-radius: 15px; background: white;">
+                <h3>Sample Food Item</h3>
+                <p>Category: Food | Price: ₱50</p>
+                <p><i>(Teammate: Insert card design here)</i></p>
+            </div>
+        </div>
+
+        <!-- test only pls change temporary inline - merch -->
+        <div class="col-md-4 col-sm-6 mb-4">
+            <div class="product-card merch highprice low" style="border: 1px solid #ccc; padding: 20px; border-radius: 15px; background: white;">
+                <h3>Sample Merch Item</h3>
+                <p>Category: Merch | Price: ₱250</p>
+                <p><i>(Teammate: Insert card design here)</i></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--SCRIPT -->
+@section scripts {
+    <script src="~/Scripts/ProductPageLogic.js"></script>
+}
+
+
