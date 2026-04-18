@@ -257,3 +257,231 @@ body.product-page {
 
 
 
+/*STYLES FOR VIEW ENTERPRISE PAGE*/
+
+body.view-enterprise-bg {
+    background: linear-gradient(to top, rgba(255, 222, 66, 0.5), rgba(255, 222, 66, 0.5), rgba(17, 31, 162, 0.5))#111fa2 !important;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.enterprise-page {
+    min-height: 100vh;
+    padding: 40px;
+}
+
+.enterprise-floating-card {
+    width: 96vw;
+    max-width: 1800px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 20px;
+    height: 86vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/*ENTERPRISE HEADER*/
+
+.enterprise-header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #f6f6f6;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ent-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.ent-info h2 {
+    font-weight: bold;
+    color: #111fa2;
+}
+
+.status-online {
+    font-size: 20px;
+    color: #111fa2;
+}
+
+.ent-msg-btn {
+    width: 160px;
+    height: 42px;
+    border-radius: 12px;
+    border: none;
+    background: #f6f6f6;
+    color: #111fa2;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(17, 31, 162, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ent-msg-btn:hover {
+    color: #111fa2;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+
+.enterprise-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f0f0f0;
+    border: 2px solid #ddd;
+}
+
+.enterprise-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+
+
+/*PRODUCTS IN VIEW ENTERPRISE*/
+
+.ent-product-section {
+    margin-top: 15px;
+    overflow-y: auto;
+    flex-grow: 1;
+    padding-right: 10px;
+}
+
+.ent-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.ent-product-section h2 {
+    font-weight: bold;
+    color: #111fa2;
+    border-left-style: solid;
+    border-color: #edba21;
+    border-width: 5px;
+    padding: 10px;
+    margin-left: 60px;
+}
+
+.ent-product-card {
+    border-radius: 15px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 4px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    text-align: left;
+}
+
+.ent-product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;
+}
+
+.product-img-container {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    background: #eee;
+}
+
+.ent-product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+
+}
+
+.ent-product-name {
+    font-size: 2rem;
+    font-weight: normal;
+    color: #111fa2;
+}
+
+.ent-product-price {
+    font-size: 2rem;
+    color: #111fa2;
+    font-weight: normal;
+}
+
+
+/*MEDIA QUERIES FOR ENTERPRISE PAGE*/
+
+@media (max-width: 768px) {
+
+    .ent-product-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .enterprise-header {
+        padding: 30px;
+        align-items: flex-start;
+    }
+
+    .enterprise-picture {
+        width: 80px;
+        height: 80px;
+    }
+
+    .ent-info h2 {
+        font-size: 2.5rem;
+        margin: 0;
+    }
+
+    .ent-msg-btn {
+        width: 140px; 
+        height: 35px;
+        font-size: 13px;
+    }
+
+    .enterprise-floating-card {
+        width: 95vw;
+        padding: 15px; 
+    }
+
+    .ent-product-section h2 {
+        margin-left: 10px; 
+        font-size: 2rem;
+    }
+}
+
