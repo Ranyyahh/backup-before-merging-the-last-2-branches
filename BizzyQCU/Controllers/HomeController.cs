@@ -34,11 +34,20 @@ namespace BizzyQCU.Controllers
             return View();
         }
 
+      
         public ActionResult ProductList()
         {
             ViewBag.Message = "Product List page.";
 
             return View();
         }
+
+        public ActionResult ViewEnterprise()
+        {
+            ViewBag.Message = "Your Enterprises.";
+            return View();
+        }
+
+
     }
 }

@@ -6,32 +6,42 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var btn = document.querySelector('.navbar-toggle');
+            var nav = document.getElementById('main-nav');
+            if (btn && nav) {
+                btn.addEventListener('click', function () {
+                    if (nav.classList.contains('open')) {
+                        nav.classList.remove('open');
+                    } else {
+                        nav.classList.add('open');
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 <body class="@ViewBag.BodyClass">
     <div class="navbar navbar-inverse navbar-fixed-top custom-navbar">
         <div class="container">
             <div class="navbar-header">
-
                 <a href="@Url.Action("Index", "Home")" class="navbar-brand">
-                    <img src="~/Content/Images/BizzyQCU-navbar-logo.png" />
+                    <img src="~/Content/Images/BizzyQCU-navbar-logo.png" alt="BizzyQCU" />
                 </a>
-
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                <button type="button" class="navbar-toggle" title="more options">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
             </div>
-
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" id="main-nav">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Homepage", "Home")</li>
                     <li>@Html.ActionLink("Products", "ProductList", "ProductList")</li>
                     <li>@Html.ActionLink("Enterprises", "Contact", "Home")</li>
                     <li>@Html.ActionLink("About Us", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-
                 </ul>
             </div>
         </div>
@@ -43,7 +53,6 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
