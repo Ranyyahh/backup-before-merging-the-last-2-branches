@@ -34,5 +34,10 @@ namespace BizzyQCU.Controllers
         {
             return View();
         }
+
+        public ActionResult Manage()
+        {
+            return View();
+        }
     } // This one closes the HomeController class
 } // This one closes the Namespace
