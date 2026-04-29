@@ -1,12 +1,8 @@
-// ============================================================
-// AdminItemListing.js (FULL FIXED VERSION)
-// ============================================================
-
-// ── TODO (DB): GET enterprise ID from URL ──
 const params = new URLSearchParams(window.location.search);
 const id = params.get('enterpriseId');
 
-// ── EXAMPLE DATA (REMOVE WHEN DB IS READY) ──
+// TODO (DB): GET enterprise ID from URL
+
 const CHART_DATA = {
     sales: {
         labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
@@ -22,7 +18,6 @@ const CHART_DATA = {
     }
 };
 
-// ── CHART DRAW FUNCTION ──
 function drawChart(canvas, dataset) {
     canvas.style.width = '';
     canvas.style.height = '';
@@ -53,7 +48,6 @@ function drawChart(canvas, dataset) {
     const xPos = i => pad.left + (i / (n - 1)) * chartW;
     const yPos = v => pad.top + chartH - ((v - minVal) / (maxVal - minVal)) * chartH;
 
-    // GRID + Y AXIS
     ctx.font = '11px DM Sans, sans-serif';
     ctx.fillStyle = '#9aa3bf';
     ctx.textAlign = 'right';
@@ -73,7 +67,6 @@ function drawChart(canvas, dataset) {
         ctx.fillText(Math.round(v), pad.left - 6, y + 4);
     }
 
-    // LABELS
     ctx.textAlign = 'center';
     ctx.textBaseline = 'top';
 
@@ -82,14 +75,16 @@ function drawChart(canvas, dataset) {
         ctx.fillText(lbl, xPos(i), pad.top + chartH + 8);
     });
 
-    // AREA
     ctx.beginPath();
     ctx.moveTo(xPos(0), yPos(vals[0]));
 
     for (let i = 1; i < n; i++) {
-        const x0 = xPos(i - 1), y0 = yPos(vals[i - 1]);
-        const x1 = xPos(i), y1 = yPos(vals[i]);
+        const x0 = xPos(i - 1);
+        const y0 = yPos(vals[i - 1]);
+        const x1 = xPos(i);
+        const y1 = yPos(vals[i]);
         const cpx = (x0 + x1) / 2;
+
         ctx.bezierCurveTo(cpx, y0, cpx, y1, x1, y1);
     }
 
@@ -100,17 +95,20 @@ function drawChart(canvas, dataset) {
     const grad = ctx.createLinearGradient(0, pad.top, 0, pad.top + chartH);
     grad.addColorStop(0, color + '30');
     grad.addColorStop(1, color + '05');
+
     ctx.fillStyle = grad;
     ctx.fill();
 
-    // LINE
     ctx.beginPath();
     ctx.moveTo(xPos(0), yPos(vals[0]));
 
     for (let i = 1; i < n; i++) {
-        const x0 = xPos(i - 1), y0 = yPos(vals[i - 1]);
-        const x1 = xPos(i), y1 = yPos(vals[i]);
+        const x0 = xPos(i - 1);
+        const y0 = yPos(vals[i - 1]);
+        const x1 = xPos(i);
+        const y1 = yPos(vals[i]);
         const cpx = (x0 + x1) / 2;
+
         ctx.bezierCurveTo(cpx, y0, cpx, y1, x1, y1);
     }
 
@@ -118,7 +116,6 @@ function drawChart(canvas, dataset) {
     ctx.lineWidth = 2.5;
     ctx.stroke();
 
-    // POINTS
     vals.forEach((v, i) => {
         ctx.beginPath();
         ctx.arc(xPos(i), yPos(v), 4, 0, Math.PI * 2);
@@ -130,33 +127,30 @@ function drawChart(canvas, dataset) {
     });
 }
 
-// ── STATE ──
 let activeTab = 'sales';
 
-// ── SAFE INIT ──
 window.addEventListener('DOMContentLoaded', () => {
-
     const canvas = document.getElementById('detailChart');
-    if (!canvas) return;
 
-    renderChart('sales');
+    if (canvas) {
+        renderChart('sales');
 
-    window.addEventListener('resize', () => {
-        renderChart(activeTab);
-    });
+        window.addEventListener('resize', () => {
+            renderChart(activeTab);
+        });
+    }
 
-    // ── TABS ──
     const tabSales = document.getElementById('tabSales');
     const tabRatings = document.getElementById('tabRatings');
 
     if (tabSales && tabRatings) {
-
         tabSales.addEventListener('click', () => {
             if (activeTab === 'sales') return;
 
             activeTab = 'sales';
             tabSales.classList.add('active');
             tabRatings.classList.remove('active');
+
             renderChart('sales');
         });
 
@@ -166,132 +160,126 @@ window.addEventListener('DOMContentLoaded', () => {
             activeTab = 'ratings';
             tabRatings.classList.add('active');
             tabSales.classList.remove('active');
+
             renderChart('ratings');
         });
     }
 
-    const modalBackdrop = document.getElementById('modalBackdrop');
-    const deleteBtn = document.getElementById('deleteBtn');
-    const cancelDelete = document.getElementById('cancelDelete');
-    const confirmDelete = document.getElementById('confirmDelete');
+    const modalBackdrop = document.getElementById('deleteModal');
+    const deleteBtn = document.querySelector('.delete-btn');
 
     function closeModal() {
-        modalBackdrop.classList.remove('active');
+        if (modalBackdrop) {
+            modalBackdrop.classList.remove('active');
+        }
     }
 
-    if (deleteBtn) {
+    if (deleteBtn && modalBackdrop) {
         deleteBtn.addEventListener('click', () => {
-            const name = document.getElementById('profileName').textContent;
-            document.getElementById('modalEnterpriseName').textContent = name;
             modalBackdrop.classList.add('active');
         });
     }
 
-    if (cancelDelete) cancelDelete.addEventListener('click', closeModal);
+    const cancelBtn = document.querySelector('.modal-cancel');
+
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', closeModal);
+    }
 
     if (modalBackdrop) {
-        modalBackdrop.addEventListener('click', (e) => {
-            if (e.target === modalBackdrop) closeModal();
-        });
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeModal();
-    });
-
-    if (confirmDelete) {
-        confirmDelete.addEventListener('click', () => {
-
-            confirmDelete.textContent = 'Deleting...';
-            confirmDelete.disabled = true;
-
-            setTimeout(() => {
+        modalBackdrop.addEventListener('click', e => {
+            if (e.target === modalBackdrop) {
                 closeModal();
-                confirmDelete.textContent = 'Yes, Delete';
-                confirmDelete.disabled = false;
-
-                window.location.href = '/AdminPanel/AdminLandingEntrep';
-
-            }, 1200);
+            }
         });
     }
 
-    // ── NAVIGATION ──
-    const viewListingBtn = document.getElementById('viewListingBtn');
-
-    if (viewListingBtn) {
-        viewListingBtn.addEventListener('click', () => {
-            window.location.href = '/AdminPanel/AdminItemListing';
-        });
-    }
-
-    const viewDocsBtn = document.getElementById('viewDocsBtn');
-
-    if (viewDocsBtn) {
-        viewDocsBtn.addEventListener('click', () => {
-            alert('View Documents — connect backend');
-        });
-    }
-
-    const removeItemBtn = document.getElementById('removeItemBtn');
-
-    if (removeItemBtn) {
-        removeItemBtn.addEventListener('click', () => {
-            alert('Remove Item — connect backend');
-        });
-    }
-
-    // ── PRODUCT SEARCH ──
-    const productSearchBtn = document.getElementById('productSearchBtn');
-    const productSearch = document.getElementById('productSearch');
-
-    function searchProduct() {
-        const query = productSearch.value.trim();
-        if (!query) return;
-        console.log('Product search:', query);
-    }
-
-    if (productSearchBtn) productSearchBtn.addEventListener('click', searchProduct);
-
-    if (productSearch) {
-        productSearch.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') searchProduct();
-        });
-    }
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
 
     const searchInput = document.getElementById('searchInput');
 
     if (searchInput) {
         searchInput.addEventListener('input', function () {
             const query = this.value.toLowerCase().trim();
+            const products = document.querySelectorAll('.product-card');
 
-            const nameEl = document.getElementById('profileName');
-            if (!nameEl) return;
+            products.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
 
-            const name = nameEl.textContent.toLowerCase();
+                if (query === '') {
+                    card.style.display = '';
+                } else if (name.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
 
-            if (query === '') {
-                nameEl.style.opacity = '1';
-                nameEl.style.color = '#000';
-                return;
-            }
+    const productSearch = document.getElementById('productSearch');
 
-            if (name.includes(query)) {
-                nameEl.style.opacity = '1';
-                nameEl.style.color = '#4A6CF7';
-            } else {
-                nameEl.style.opacity = '0.3';
-            }
+    if (productSearch) {
+        productSearch.addEventListener('input', function () {
+            const query = this.value.toLowerCase().trim();
+            const products = document.querySelectorAll('.product-card');
+
+            products.forEach(card => {
+                const name = card.dataset.name.toLowerCase();
+
+                if (query === '') {
+                    card.style.display = '';
+                } else if (name.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         });
     }
 });
 
 function renderChart(tab) {
     const canvas = document.getElementById('detailChart');
-    if (!canvas) return;
+    const title = document.getElementById('chartTitle');
+
+    if (!canvas || !title) return;
 
     const dataset = CHART_DATA[tab];
-    document.getElementById('chartTitle').textContent = dataset.title;
+    title.textContent = dataset.title;
 
     drawChart(canvas, dataset);
+}
+
+function openModal() {
+    const modal = document.getElementById('deleteModal');
+
+    if (modal) {
+        modal.classList.add('active');
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('deleteModal');
+
+    if (modal) {
+        modal.classList.remove('active');
+    }
+}
+
+function confirmDelete() {
+    closeModal();
+    alert('Account deleted');
+}
+
+function approveItem() {
+    alert('Item approved');
+}
+
+function removeItem() {
+    alert('Item removed');
 }
