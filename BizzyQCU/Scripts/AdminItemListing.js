@@ -4,7 +4,7 @@
 
 // ── TODO (DB): GET enterprise ID from URL ──
 const params = new URLSearchParams(window.location.search);
-const id = params.get('enterpriseId'); // FIXED (was commented only)
+const id = params.get('enterpriseId');
 
 // ── EXAMPLE DATA (REMOVE WHEN DB IS READY) ──
 const CHART_DATA = {
@@ -170,7 +170,6 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── DELETE MODAL ──
     const modalBackdrop = document.getElementById('modalBackdrop');
     const deleteBtn = document.getElementById('deleteBtn');
     const cancelDelete = document.getElementById('cancelDelete');
@@ -217,7 +216,7 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── FIXED NAVIGATION (NO RAZOR IN JS) ──
+    // ── NAVIGATION ──
     const viewListingBtn = document.getElementById('viewListingBtn');
 
     if (viewListingBtn) {
@@ -259,48 +258,40 @@ window.addEventListener('DOMContentLoaded', () => {
             if (e.key === 'Enter') searchProduct();
         });
     }
+
+    const searchInput = document.getElementById('searchInput');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            const query = this.value.toLowerCase().trim();
+
+            const nameEl = document.getElementById('profileName');
+            if (!nameEl) return;
+
+            const name = nameEl.textContent.toLowerCase();
+
+            if (query === '') {
+                nameEl.style.opacity = '1';
+                nameEl.style.color = '#000';
+                return;
+            }
+
+            if (name.includes(query)) {
+                nameEl.style.opacity = '1';
+                nameEl.style.color = '#4A6CF7';
+            } else {
+                nameEl.style.opacity = '0.3';
+            }
+        });
+    }
 });
 
-// ── RENDER ──
 function renderChart(tab) {
     const canvas = document.getElementById('detailChart');
     if (!canvas) return;
 
     const dataset = CHART_DATA[tab];
-
     document.getElementById('chartTitle').textContent = dataset.title;
 
     drawChart(canvas, dataset);
-}
-
-// ── HELPERS (DB READY) ──
-function populateProfile(enterprise) {
-    document.getElementById('profileName').textContent = enterprise.name;
-    document.getElementById('profileId').textContent = enterprise.id;
-    document.getElementById('profileEmail').textContent = enterprise.email;
-
-    const statusEl = document.getElementById('profileStatus');
-    statusEl.textContent = enterprise.status;
-    statusEl.className = 'info-value status-' + enterprise.status.toLowerCase();
-
-    const starsEl = document.getElementById('profileStars');
-    starsEl.innerHTML = '';
-
-    for (let i = 1; i <= 5; i++) {
-        const s = document.createElement('span');
-        s.className = 'star' + (i <= enterprise.rating ? ' filled' : '');
-        s.textContent = '★';
-        starsEl.appendChild(s);
-    }
-
-    document.getElementById('chartSubtitle').textContent = enterprise.name;
-}
-
-function populateProduct(product) {
-    document.getElementById('productName').textContent = product.name;
-    document.getElementById('productPrice').textContent = '₱' + Number(product.price).toFixed(2);
-
-    if (product.imageUrl) {
-        document.getElementById('productImg').src = product.imageUrl;
-    }
 }
