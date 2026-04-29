@@ -150,6 +150,7 @@
     <Content Include="Content\Images\test-img-profile.jpg" />
     <Content Include="Content\Images\test-img1.jpg" />
     <Content Include="Content\Images\test-img2.jpg" />
+    <Content Include="Content\MobileNavbar.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
