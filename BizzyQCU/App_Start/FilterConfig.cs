@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace BizzyQCU
+namespace User_Profile_Seller_Juvi
 {
     public class FilterConfig
     {

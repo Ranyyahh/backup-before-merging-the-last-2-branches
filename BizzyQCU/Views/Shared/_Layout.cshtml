@@ -1,40 +1,82 @@
-﻿<!DOCTYPE html>
+@{
+    var actionName = (ViewContext.RouteData.Values["action"] as string ?? "Index").ToLowerInvariant();
+    var navSection = (ViewBag.NavSection as string ?? actionName).ToLowerInvariant();
+    var pageClass = ViewBag.PageClass as string ?? string.Empty;
+    var showBackButton = ViewBag.ShowBackButton != null && (bool)ViewBag.ShowBackButton;
+    var hideGlobalHeader = ViewBag.HideGlobalHeader != null && (bool)ViewBag.HideGlobalHeader;
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - BizzyQCU</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Tracking", "Tracking", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
+<body class="app-body @pageClass">
+    @if (!hideGlobalHeader)
+    {
+        <header class="site-header">
+            <nav class="navbar navbar-expand-lg site-nav">
+                <div class="container-fluid site-nav-inner">
+                    <a class="site-brand" href="@Url.Action("Index", "Home")" aria-label="BizzyQCU home">
+                        <img class="brand-logo-image" src="@Url.Content("~/Content/Images/Logo.png")" alt="BizzyQCU" />
+                    </a>
+
+                    <button class="navbar-toggler site-menu-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#siteMenu" aria-controls="siteMenu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="siteMenu">
+                        <div class="site-nav-divider"></div>
+                        <ul class="navbar-nav mx-auto site-nav-links">
+                            <li class="nav-item">
+                                <a class="nav-link @(navSection == "home" ? "is-active" : string.Empty)" href="@Url.Action("Index", "Home")">HOME</a>
+                            </li>
+                            <li class="nav-item">
+                                <span class="nav-link nav-link-static">PRODUCTS</span>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @(navSection == "enterprises" ? "is-active" : string.Empty)" href="@Url.Action("Enterprise", "Home")">ENTERPRISES</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @(navSection == "about" ? "is-active" : string.Empty)" href="@Url.Action("About", "Home")">ABOUT US</a>
+                            </li>
+                        </ul>
+                        <div class="site-header-icons">
+                            <span class="header-icon-button inert-header-icon" aria-label="Shopping cart">
+                                <img class="header-icon-image" src="@Url.Content("~/Content/Images/cart-icon.png")" alt="" aria-hidden="true" />
+                            </span>
+                            <a class="header-profile-button" href="@Url.Action("Index", "Home")" aria-label="Open landing page">
+                                <img class="header-icon-image header-icon-image-profile" src="@Url.Content("~/Content/Images/account-icon.png")" alt="" aria-hidden="true" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+    }
+
+    <main class="page-root">
+        @if (showBackButton)
+        {
+            <button class="back-button" type="button" onclick="if (window.history.length > 1) { window.history.back(); } else { window.location.href = '@Url.Action("Index", "Home")'; }" aria-label="Go back">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14.5 6.5 9 12l5.5 5.5"></path>
+                </svg>
+            </button>
+        }
+
+        @if (TempData["FlashMessage"] != null)
+        {
+            <div class="flash-message" role="status">@TempData["FlashMessage"]</div>
+        }
+
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </main>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
