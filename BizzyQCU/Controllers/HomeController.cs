@@ -34,5 +34,28 @@ namespace BizzyQCU.Controllers
         {
             return View();
         }
-    } // This one closes the HomeController class
-} // This one closes the Namespace
+
+        public ActionResult Homepage()
+        {
+            ViewBag.Message = "Your Homepage.";
+
+            return View();
+        }
+
+      
+        public ActionResult ProductList()
+        {
+            ViewBag.Message = "Product List page.";
+
+            return View();
+        }
+
+        public ActionResult ViewEnterprise()
+        {
+            ViewBag.Message = "Your Enterprises.";
+            return View();
+        }
+
+
+    }
+}
