@@ -18,7 +18,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44357</IISExpressSSLPort>
+    <IISExpressSSLPort>44343</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -123,9 +123,10 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ChatroomController.cs" />
     <Compile Include="Controllers\EnterpriseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProductListController.cs" />
+    <Compile Include="Controllers\EnterpriseListController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -136,6 +137,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Chatroom.css" />
     <Content Include="Content\images\background.png" />
     <Content Include="Content\images\bizzyqcu logo.png" />
     <Content Include="Content\Login.css" />
@@ -199,8 +201,9 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Homepage.cshtml" />
-    <Content Include="Views\ProductList\ProductList.cshtml" />
+    <Content Include="Views\EnterpriseList\EnterpriseList.cshtml" />
     <Content Include="Views\Enterprise\ViewEnterprise.cshtml" />
+    <Content Include="Views\Chatroom\Chatroom.cshtml" />
     <Content Include="Views\Enterprise\EnterpriseList.cshtml" />
   </ItemGroup>
   <ItemGroup>
