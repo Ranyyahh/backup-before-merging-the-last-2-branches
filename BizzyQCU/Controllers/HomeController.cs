@@ -49,6 +49,12 @@ namespace BizzyQCU.Controllers
             ViewBag.Message = "Your Enterprises.";
             return View();
         }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "About page.";
+            return View();
+        }
     }
 }
 
