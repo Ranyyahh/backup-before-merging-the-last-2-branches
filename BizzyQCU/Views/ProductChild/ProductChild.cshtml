@@ -69,7 +69,7 @@
             @Html.AntiForgeryToken()
 
             @* Order Button *@
-            <button class="btn-order" id="btnOrder" type="button">
+            <button class="btn-order" id="btnOrder" type="button" onclick="window.location.href = '@Url.Action("CheckoutPage", "Checkout")'">
                 Order Now
             </button>
 
@@ -93,7 +93,7 @@
             <button class="btn-view-enterprise"
                     id="btnViewEnterprise"
                     data-enterprise-id="@enterpriseId"
-                    type="button">
+                    type="button" onclick="window.location.href = '@Url.Action("ViewEnterprise", "Enterprise")'">
                 View Enterprise
             </button>
         </div>

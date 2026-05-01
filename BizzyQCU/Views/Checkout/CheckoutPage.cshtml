@@ -68,13 +68,13 @@
                 <span class="total-payment" id="totalPayment">₱0</span>
             </div>
             <div>
-                <button class="btn btn-buy-more me-3" id="buyMoreBtn"><i class="fas fa-plus-circle"></i> Buy More</button>
-                <button class="btn btn-place-order" id="placeOrderBtn"><i class="fas fa-check-circle"></i> Place Order</button>
+                <button class="btn btn-buy-more me-3" id="buyMoreBtn" onclick="window.location.href = '@Url.Action("Productlist", "ProductList")'">
+                    <i class="fas fa-plus-circle"></i> Buy More
+                </button>
+                <button class="btn btn-place-order" id="placeOrderBtn" onclick="window.location.href = '@Url.Action("tracking", "Home")'">
+                    <i class="fas fa-check-circle"></i> Place Order
+                </button>
             </div>
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <script src="~/Scripts/checkout.js"></script>
-}

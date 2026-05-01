@@ -32,17 +32,17 @@
             <a href="@Url.Action("EnterpriseList", "EnterpriseList")">ENTERPRISES</a>
             <a href="@Url.Action("About", "Home")">ABOUT US</a>
 
-            <a href="@Url.Action("Profile", "Profile")" class="account-mobile">
+            <a href="@Url.Action("UserProfile", "Profile")" class="account-mobile">
                 ACCOUNT
             </a>
         </div>
 
         <div class="right-icons">
             <div class="cart-icon">
-                <a href="#"><img src="~/Images/cart-icon.png" alt="Cart" /></a>
+                <a href="#"><img src="~/Images/cart-icon.png" alt="Cart"  onclick="window.location.href = '@Url.Action("tracking", "Home")'"/></a>
             </div>
             <div class="account-icon account-desktop">
-                <a href="@Url.Action("Profile", "Profile")">
+                <a href="@Url.Action("UserProfile", "Profile")">
                     <img src="~/Images/account-icon.png" alt="Account" />
                 </a>
             </div>
