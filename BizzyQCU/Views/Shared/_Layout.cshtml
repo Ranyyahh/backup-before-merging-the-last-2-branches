@@ -3,6 +3,7 @@
     var showBackButton = ViewBag.ShowBackButton != null && (bool)ViewBag.ShowBackButton;
     var hideGlobalHeader = ViewBag.HideGlobalHeader != null && (bool)ViewBag.HideGlobalHeader;
     var pageTitle = ViewData["Title"] ?? ViewBag.Title;
+    var backUrl = ViewBag.BackUrl as string;
 }
 <!DOCTYPE html>
 <html>
@@ -39,18 +40,18 @@
             }
 
             <div class="logo">
-                <a href="@Url.Action("Homepage", "Home")"><img src="@Url.Content("~/Content/images/Logo.png")" alt="logo"></a>
+                <a href="/"><img src="@Url.Content("~/Content/images/Logo.png")" alt="logo"></a>
             </div>
 
             <div class="divider"></div>
 
             <div class="nav-links" id="mainNav">
                 <a href="@Url.Action("Homepage", "Home")">HOME</a>
-                <a href="@Url.Action("ProductList", "Home")">PRODUCTS</a>
-                <a href="@Url.Action("Enterprise", "Home")">ENTERPRISES</a>
+                <a href="@Url.Action("ProductList", "ProductList")">PRODUCTS</a>
+                <a href="#">ENTERPRISES</a>
                 <a href="@Url.Action("About", "Home")">ABOUT US</a>
 
-                <a href="@Url.Action("Profile", "Home")" class="account-mobile">
+                <a href="#" class="account-mobile">
                     ACCOUNT
                 </a>
 
@@ -58,12 +59,10 @@
 
             <div class="right-icons">
                 <div class="cart-icon">
-                    <a href="@Url.Action("Transactions", "Home")"><img src="@Url.Content("~/Content/images/cart-icon.png")"></a>
+                    <a href="#"><img src="@Url.Content("~/Content/images/cart-icon.png")"></a>
                 </div>
                 <div class="account-icon account-desktop">
-                    <a href="@Url.Action("Profile", "Home")">
-                        <img src="@Url.Content("~/Content/images/account-icon.png")">
-                    </a>
+                    <img src="@Url.Content("~/Content/images/account-icon.png")">
                 </div>
 
 
@@ -76,6 +75,15 @@
     }
 
     <main class="page-root">
+        @if (showBackButton)
+        {
+            <button class="back-button" type="button" onclick="@(string.IsNullOrWhiteSpace(backUrl) ? "if (window.history.length > 1) { window.history.back(); } else { window.location.href = '" + Url.Action("Index", "Home") + "'; }" : "window.location.href = '" + backUrl + "';")" aria-label="Go back">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M14.5 6.5 9 12l5.5 5.5"></path>
+                </svg>
+            </button>
+        }
+
         @if (TempData["FlashMessage"] != null)
         {
             <div class="flash-message" role="status">@TempData["FlashMessage"]</div>

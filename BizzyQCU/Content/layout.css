@@ -54,14 +54,15 @@ body.app-body > .navbar .divider {
     height: 40px;
     background: #f0bc26;
     flex: 0 0 auto;
+    margin-right: 10px;
 }
 
 body.app-body > .navbar .nav-links {
     display: flex;
     align-items: center;
-    gap: 38px;
-    flex: 1 1 auto;
-    min-width: 0;
+    gap: 34px;
+    flex: 0 0 auto;
+    margin-right: auto;
 }
 
 body.app-body > .navbar .nav-links a {
@@ -88,6 +89,7 @@ body.app-body > .navbar .right-icons {
     align-items: center;
     gap: 18px;
     flex: 0 0 auto;
+    margin-left: 24px;
 }
 
 body.app-body > .navbar .cart-icon,

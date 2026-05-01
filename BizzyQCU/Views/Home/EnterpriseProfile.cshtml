@@ -1,4 +1,7 @@
 @model User_Profile_Seller_Juvi.Controllers.AccountSettingsPageViewModel
+@{
+    var showProfileSaveActions = ViewBag.ShowProfileSaveActions == null || (bool)ViewBag.ShowProfileSaveActions;
+}
 
 <div class="profile-sidebar">
     <div class="profile-title">Enterprise Manager Information</div>
@@ -61,12 +64,15 @@
         </div>
     </div>
 
-    <div class="profile-actions-row">
-        <button class="primary-action-button" type="submit">Save</button>
+    @if (showProfileSaveActions)
+    {
+        <div class="profile-actions-row">
+            <button class="primary-action-button" type="submit">Save</button>
 
-        <button class="primary-action-button wide" type="button"
-                data-bs-toggle="modal" data-bs-target="#passwordModal">
-            Change Password
-        </button>
-    </div>
+            <button class="primary-action-button wide" type="button"
+                    data-bs-toggle="modal" data-bs-target="#passwordModal">
+                Change Password
+            </button>
+        </div>
+    }
 </div>

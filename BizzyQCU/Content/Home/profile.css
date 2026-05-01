@@ -18,8 +18,20 @@
     margin-top: 12px;
 }
 
-.profile-photo-section {
+.profile-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
     margin-bottom: 22px;
+}
+
+.profile-page-title {
+    margin: 0;
+    color: var(--app-blue);
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.1;
 }
 
 .profile-layout {
@@ -31,21 +43,30 @@
 
 .profile-main {
     display: grid;
-    gap: 16px;
+    grid-template-columns: 180px 1fr;
+    column-gap: 24px;
+    row-gap: 0;
     align-items: start;
+}
+
+.profile-photo-section {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    margin-bottom: 0;
 }
 
 .profile-photo-tools {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    gap: 22px;
+    gap: 14px;
 }
 
 .profile-tool-buttons {
     width: 160px;
     display: grid;
-    gap: 12px;
+    gap: 10px;
 }
 
 .profile-tool-buttons .primary-action-button {
@@ -57,9 +78,17 @@
     font-weight: 800;
     line-height: 1.2;
     margin: 0;
-    width: 100%;
+    width: auto;
     text-align: center;
     justify-self: center;
+    padding-bottom: 4px;
+}
+
+.profile-main > .profile-title {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+    margin-bottom: 16px;
 }
 
 .profile-fields-block,
@@ -68,10 +97,20 @@
     gap: 16px;
 }
 
+.profile-main .profile-fields-block {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 0;
+}
+
+.profile-sidebar > .profile-field-row:first-of-type {
+    margin-top: 0;
+}
+
 .profile-field-row {
     display: grid;
     grid-template-columns: 160px 220px;
-    align-items: center;
+    align-items: start;
     gap: 10px;
 }
 
@@ -81,7 +120,8 @@
 
 .profile-input-wrap {
     display: grid;
-    gap: auto;
+    gap: 4px;
+    padding-top: 3px;
 }
 
 .profile-input {
@@ -246,8 +286,21 @@
         padding-left: 0;
     }
 
+    .profile-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 18px;
+    }
+
     .profile-main {
         gap: 26px;
+    }
+
+    .profile-photo-section,
+    .profile-main > .profile-title,
+    .profile-main .profile-fields-block {
+        grid-column: auto;
+        grid-row: auto;
     }
 
     .profile-photo-tools {

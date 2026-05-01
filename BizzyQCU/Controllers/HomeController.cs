@@ -128,7 +128,6 @@ namespace User_Profile_Seller_Juvi.Controllers
         public IList<TransactionRecordViewModel> Transactions { get; set; }
     }
 
-    // ==================== HOME CONTROLLER ====================
     public class HomeController : Controller
     {
         private const string ProfileSessionKey = "ProfileState";
@@ -148,16 +147,34 @@ namespace User_Profile_Seller_Juvi.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult Products()
+        {
+            ViewBag.PageClass = "page-products";
+            ViewBag.ShowBackButton = true;
+            ViewBag.NavSection = "none";
+            ViewBag.Title = "Products";
+            return View("Products");
+        }
+
         [ActionName("ProductList")]
         public ActionResult ProductListPage()
         {
-            return RedirectToAction("Index");
+            return RedirectToAction("Products");
         }
 
         [ActionName("Enterprise")]
         public ActionResult Enterprise()
         {
-            return RedirectToAction("Profile");
+            return RedirectToAction("Enterprises");
+        }
+
+        public ActionResult Enterprises()
+        {
+            ViewBag.PageClass = "page-enterprises";
+            ViewBag.ShowBackButton = true;
+            ViewBag.NavSection = "enterprises";
+            ViewBag.Title = "Enterprises";
+            return View("Enterprises");
         }
 
         [ActionName("Profile")]
@@ -169,9 +186,9 @@ namespace User_Profile_Seller_Juvi.Controllers
 
         public ActionResult UserProfile()
         {
-           return RedirectToAction("Profile"); 
+            PrepareUserProfilePage();
+            return View("UserProfile", BuildAccountSettingsViewModel(GetProfile(), new ChangePasswordViewModel()));
         }
-
         public ActionResult AccountSettings()
         {
             PrepareProfilePage("AccountSettings", "none");
@@ -183,7 +200,7 @@ namespace User_Profile_Seller_Juvi.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SaveProfile([Bind(Prefix = "Profile")] UserProfileViewModel model)
         {
-            PrepareProfilePage("Profile", "enterprises");
+            PrepareProfilePage("AccountSettings", "none");
 
             if (string.IsNullOrWhiteSpace(model.PhotoDataUrl))
             {
@@ -197,7 +214,7 @@ namespace User_Profile_Seller_Juvi.Controllers
 
             Session[ProfileSessionKey] = model;
             TempData["FlashMessage"] = "Profile information saved.";
-            return RedirectToAction("Profile");
+            return RedirectToAction("AccountSettings");
         }
 
         [HttpPost]
@@ -337,8 +354,20 @@ namespace User_Profile_Seller_Juvi.Controllers
         {
             ViewBag.PageClass = "page-profile";
             ViewBag.ShowBackButton = true;
+            ViewBag.BackUrl = Url.Action("Index", "Home");
             ViewBag.SettingsAction = settingsAction;
             ViewBag.NavSection = navSection;
+        }
+
+        private void PrepareUserProfilePage()
+        {
+            ViewBag.PageClass = "page-profile";
+            ViewBag.ShowBackButton = true;
+            ViewBag.BackUrl = Url.Action("Index", "Home");
+            ViewBag.NavSection = "none";
+            ViewBag.ShowProfileEditTools = false;
+            ViewBag.ShowProfileSaveActions = false;
+            ViewBag.Title = "User Profile";
         }
 
         private AccountSettingsPageViewModel BuildAccountSettingsViewModel(UserProfileViewModel profile, ChangePasswordViewModel passwordChange)

@@ -1,0 +1,24 @@
+@model User_Profile_Seller_Juvi.Controllers.AccountSettingsPageViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="screen screen-profile">
+    <div class="profile-panel">
+        <div class="profile-page-header">
+            <h1 class="profile-page-title">User Profile</h1>
+            <a class="primary-action-button" href="@Url.Action("Profile", "Home")">Edit Profile</a>
+        </div>
+
+        <div class="profile-layout">
+
+            @Html.Partial("UserProfile", Model)
+
+            <div class="profile-separator" aria-hidden="true"></div>
+
+            @Html.Partial("EnterpriseProfile", Model)
+
+        </div>
+    </div>
+</section>

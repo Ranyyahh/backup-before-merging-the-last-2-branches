@@ -20,20 +20,6 @@
             <input id="photoInput" type="file" accept="image/*" hidden />
             <input id="qrInput" type="file" accept="image/*" hidden />
 
-            <!-- PHOTO SECTION -->
-            <div class="profile-photo-section">
-                <div class="profile-photo-tools">
-                    <img id="profilePreview" class="avatar-image large-avatar"
-                         src="@Model.Profile.PhotoDataUrl" />
-
-                    <div class="profile-tool-buttons">
-                        <button id="changePhotoBtn" class="primary-action-button" type="button">Change Photo</button>
-                        <button id="uploadQrBtn" class="primary-action-button secondary" type="button">Upload QR</button>
-                        <button id="editInfoBtn" class="primary-action-button secondary" type="button">Edit Info</button>
-                    </div>
-                </div>
-            </div>
-
             <div class="profile-layout">
 
                 @Html.Partial("UserProfile", Model)
